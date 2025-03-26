@@ -1,2 +1,6 @@
 # Taller-de-Programacion-ILI-140
-Proyectos de Taller de Programacion en Python
+Proyecto 1: Python  
+Proyecto 2: Python  
+Proyecto 3: Python  
+
+2025-1
