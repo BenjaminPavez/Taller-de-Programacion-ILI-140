@@ -1,0 +1,22 @@
+Función objetivo: 1274248909.2888541
+Transportar 446828 unidades desde Antofagasta a R2 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 1104060 unidades desde Santiago a R1 usando AT2 en el año 1. Tipo de Planta: 
+Transportar 733356 unidades desde Santiago a R2 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 645184 unidades desde Santiago a R3 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 444185 unidades desde Santiago a R4 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 1315181 unidades desde Santiago a R5 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 394478 unidades desde Santiago a R6 usando AT1 en el año 1. Tipo de Planta: 
+Transportar 1439824 unidades desde Antofagasta a R2 usando AT1 en el año 2. Tipo de Planta: 
+Transportar 308933 unidades desde Antofagasta a R3 usando AT2 en el año 2. Tipo de Planta: 
+Transportar 1280709 unidades desde Santiago a R1 usando AT2 en el año 2. Tipo de Planta: 
+Transportar 503998 unidades desde Santiago a R3 usando AT1 en el año 2. Tipo de Planta: 
+Transportar 510812 unidades desde Santiago a R4 usando AT1 en el año 2. Tipo de Planta: 
+Transportar 1828102 unidades desde Santiago a R5 usando AT1 en el año 2. Tipo de Planta: 
+Transportar 512822 unidades desde Santiago a R6 usando AT1 en el año 2. Tipo de Planta: 
+Transportar 644343 unidades desde Antofagasta a R1 usando AT1 en el año 3. Tipo de Planta: 
+Transportar 1756585 unidades desde Antofagasta a R2 usando AT1 en el año 3. Tipo de Planta: 
+Transportar 1024294 unidades desde Antofagasta a R3 usando AT2 en el año 3. Tipo de Planta: 
+Transportar 841279 unidades desde Santiago a R1 usando AT2 en el año 3. Tipo de Planta: 
+Transportar 587434 unidades desde Santiago a R4 usando AT1 en el año 3. Tipo de Planta: 
+Transportar 2541062 unidades desde Santiago a R5 usando AT1 en el año 3. Tipo de Planta: 
+Transportar 666668 unidades desde Santiago a R6 usando AT1 en el año 3. Tipo de Planta: 
