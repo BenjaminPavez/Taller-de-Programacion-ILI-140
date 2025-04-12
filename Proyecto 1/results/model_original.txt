@@ -29,7 +29,7 @@ Cutting planes:
   Gomory: 1
   Implied bound: 2
 
-Explored 1 nodes (28 simplex iterations) in 0.03 seconds (0.00 work units)
+Explored 1 nodes (28 simplex iterations) in 0.00 seconds (0.00 work units)
 Thread count was 16 (of 16 available processors)
 
 Solution count 2: 1.38747e+09 1.66925e+09 
