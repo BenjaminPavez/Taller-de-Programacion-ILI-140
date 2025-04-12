@@ -3,23 +3,32 @@ Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2)
 CPU model: AMD Ryzen 7 7700 8-Core Processor, instruction set [SSE2|AVX|AVX2|AVX512]
 Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
 
-Optimize a model with 55 rows, 280 columns and 980 nonzeros
-Model fingerprint: 0x08e90053
+Optimize a model with 70 rows, 280 columns and 1280 nonzeros
+Model fingerprint: 0x4131c74b
 Variable types: 270 continuous, 10 integer (10 binary)
 Coefficient statistics:
   Matrix range     [1e+00, 1e+07]
   Objective range  [4e+01, 4e+08]
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 3e+06]
-Presolved: 40 rows, 100 columns, 275 nonzeros
+Presolve removed 15 rows and 180 columns
+Presolve time: 0.00s
+Presolved: 55 rows, 100 columns, 395 nonzeros
+Variable types: 90 continuous, 10 integer (10 binary)
+Found heuristic solution: objective 2.976433e+09
+Found heuristic solution: objective 2.567934e+09
 
-Continuing optimization...
+Root relaxation: objective 1.693306e+09, 27 iterations, 0.00 seconds (0.00 work units)
 
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
 
-Explored 1 nodes (31 simplex iterations) in 0.00 seconds (0.00 work units)
+*    0     0               0    1.693306e+09 1.6933e+09  0.00%     -    0s
+
+Explored 1 nodes (27 simplex iterations) in 0.00 seconds (0.00 work units)
 Thread count was 16 (of 16 available processors)
 
-Solution count 3: 1.65558e+09 1.81013e+09 1.91178e+09 
+Solution count 3: 1.69331e+09 2.56793e+09 2.97643e+09 
 
 Optimal solution found (tolerance 1.00e-04)
-Best objective 1.655576250143e+09, best bound 1.655576250143e+09, gap 0.0000%
+Best objective 1.693305710143e+09, best bound 1.693305710143e+09, gap 0.0000%
