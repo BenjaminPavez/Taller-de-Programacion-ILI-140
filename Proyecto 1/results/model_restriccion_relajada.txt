@@ -25,7 +25,7 @@ Root relaxation: objective 1.693306e+09, 27 iterations, 0.00 seconds (0.00 work 
 
 *    0     0               0    1.693306e+09 1.6933e+09  0.00%     -    0s
 
-Explored 1 nodes (27 simplex iterations) in 0.00 seconds (0.00 work units)
+Explored 1 nodes (27 simplex iterations) in 0.01 seconds (0.00 work units)
 Thread count was 16 (of 16 available processors)
 
 Solution count 3: 1.69331e+09 2.56793e+09 2.97643e+09 

@@ -1,4 +1,4 @@
-#Datos del problema
+# Datos del problema
 
 regiones = ["R1", "R2", "R3", "R4", "R5", "R6"]
 

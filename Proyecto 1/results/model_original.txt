@@ -12,7 +12,7 @@ Coefficient statistics:
   Bounds range     [1e+00, 1e+00]
   RHS range        [1e+00, 3e+06]
 Presolve removed 0 rows and 180 columns
-Presolve time: 0.00s
+Presolve time: 0.02s
 Presolved: 70 rows, 100 columns, 560 nonzeros
 Variable types: 90 continuous, 10 integer (10 binary)
 Found heuristic solution: objective 1.669252e+09
@@ -29,7 +29,7 @@ Cutting planes:
   Gomory: 1
   Implied bound: 2
 
-Explored 1 nodes (28 simplex iterations) in 0.00 seconds (0.00 work units)
+Explored 1 nodes (28 simplex iterations) in 0.10 seconds (0.00 work units)
 Thread count was 16 (of 16 available processors)
 
 Solution count 2: 1.38747e+09 1.66925e+09 
