@@ -230,7 +230,7 @@
             \item A lo m\'as una planta por ciudad: \\ $\sum_{j} X_{ij} \leq 1, \quad \forall i \in I$
             \item Capacidad de producci\'on m\'axima: \\ $\sum_{k} \sum_{t} Y_{ikty} \leq X_{ij} \cdot Cpp_{j}, \quad \forall i \in I, \forall j \in J, \forall y \in Y$
             \item Satisfacci\'on de la demanda: \\ $\sum_{i} \sum_{t} Y_{ikty} \geq D_{ky}, \quad \forall k, y$
-            \item Solo transporte entre ciudades con planta: \\ $\sum_{i} \sum_{t} Y_{ikty} \leq \sum_{j} X_{ij} \cdot Cpp_{j}, \quad \forall i, y$
+            \item Solo ciudades con planta pueden transportar: \\ $\sum_{i} \sum_{t} Y_{ikty} \leq \sum_{j} X_{ij} \cdot Cpp_{j}, \quad \forall i, y$
             \item Definici\'on de la variable binaria: \\ $X_{ij} \in \{0,1\}, \quad \forall i, j$
         \end{itemize}
 
