@@ -1,0 +1,366 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[a4paper,top=2cm,left=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
+
+\title{Caso Funnys Company}
+\author{Grupo 4}
+\date{01-07-2024}
+
+\begin{document}
+    \begin{titlepage}
+        \centering
+        \vspace*{3cm}
+        \LARGE
+        \textbf{Caso Funnys Company}\\[1cm] 
+        \Large
+        Grupo Butify\\[1cm] 
+        \normalsize
+        22-03-2025
+        \vfill
+        \hspace*{\fill}
+        \begin{minipage}[t]{0.4\textwidth}
+            \raggedleft
+            \small
+            Nicolas Horta\\
+            Nicolas Olivos\\
+            Benjamin Pavez\\
+            Ariel Pulgar\\
+            Gabriel Saez
+        \end{minipage}
+    \end{titlepage}
+
+    \section{Introducci\'on}
+    El presente trabajo expone un modelo matem\'atico desarrollado con el objetivo de optimizar la localizaci\'on estrat\'egica de plantas de producci\'on y la distribuci\'on eficiente de productos en diversas regiones geogr\'aficas. Esta problem\'atica surge de la necesidad de las empresas modernas por minimizar costos operativos, atender de manera efectiva la demanda del mercado y garantizar una operaci\'on sostenible en el tiempo.\\
+
+    El modelo integra múltiples variables clave, entre ellas los costos de apertura de nuevas plantas, las capacidades de producción de estas instalaciones, los costos de transporte asociados al envío de productos y la demanda proyectada para las distintas regiones a lo largo del tiempo. Al considerar estas variables, se busca encontrar una configuración que no solo responda a las necesidades actuales del mercado, sino que también anticipe cambios y crecimiento en la demanda futura, maximizando el beneficio económico y la eficiencia operacional.\\
+    
+    Además, el enfoque matemático incorpora restricciones y parámetros específicos que permiten reflejar las particularidades de la red de distribución y los recursos disponibles, haciendo que las soluciones obtenidas sean prácticas y aplicables en escenarios reales. Este análisis es esencial para brindar una propuesta robusta que no solo reduzca costos, sino que también optimice el uso de recursos y mejore la competitividad de la empresa.\\
+    
+    En resumen, este modelo constituye una herramienta valiosa para la toma de decisiones estratégicas en empresas que buscan expandir su infraestructura, aumentar su alcance y mantenerse competitivas en un entorno económico dinámico y exigente.\\
+
+    \newpage
+    \section{Enunciado}
+        Funnys Company, empresa orientada a la producción de productos para la entretención en el hogar, observó fuertes cambios en el mercado experimentando un aumento explosivo de la demanda. La compañía comercializa sus productos en varias ciudades de Chile, los cuales transporta directamente desde su planta de producción ubicada en la ciudad de Rancagua hacia los puntos de venta a lo largo de todo Chile.\\
+    
+        Los ejecutivos de la empresa establecieron que su actual capacidad de producción y la red de distribución implementada no les permitirían abordar este auspicioso aumento de la demanda, por lo cual el rediseño de su capacidad de producción y red de distribución era inminente. Dentro de las alternativas a evaluar se considera la apertura de nuevas plantas de producción y la selección de medios de transporte adecuados para su distribución.\\
+        
+        La administración dividió al país en 6 grandes regiones para efectos de planificación. La demanda actual de cada región se muestra en la Tabla 1 junto con la tasa de crecimiento estimada para los siguientes 3 años.\\
+        
+        Se identificaron cinco posibles ciudades para las localizaciones de nuevas plantas de producción: Antofagasta, Valparaíso, Santiago, Concepción y Puerto Montt. En cada ciudad se debe evaluar si localizar o no una (sólo una) planta de producción. Existen dos alternativas de plantas de producción las cuales varían en su capacidad productiva (pequeña o grande) y costos (ver Tabla 2). Actualmente, la planta ubicada en Rancagua es pequeña. En la Tabla 3 se exponen los costos de apertura de una nueva planta, junto con los costos fijos y variables de producción según la capacidad de la planta en cada ciudad.\\
+        
+        Funnys Company utiliza actualmente un servicio de transporte AT1 para realizar todos sus envíos y debe evaluar qué servicio de transporte utilizar para enviar los productos a las zonas de demanda. Existen tres alternativas de transporte disponibles cuyos costos se muestran en la Tabla 4, 5 y 6.\\
+        
+        Dados todos estos antecedentes, los ejecutivos de la compañía le han solicitado confeccionar un informe técnico para la toma de decisiones en donde exponga los siguientes ítems:\\
+
+        \textbf{Requerimientos de la presentación: Diseño de la Red de Distribución}
+        \begin{enumerate}
+            \item Introducción contextualizando la empresa bajo análisis, el problema a resolver, alternativas de solución y cómo propone resolverlo.
+            \item Metodología de resolución, exponiendo y explicando modelo matemático utilizado (variables, parámetros, restricciones y función objetivo).
+            \item Supuestos realizados al momento de realizar el modelamiento.\\
+        \end{enumerate}
+
+        \textbf{Preguntas sobre la optimización de plantas de producción}
+    
+        \begin{enumerate}
+            \item[4.] ¿Cuál es la configuración óptima que le recomendaría a Funnys Company si se considera la posibilidad de implementar plantas de producción en las ciudades seleccionadas? Es decir, ¿Dónde implementaría las nuevas plantas de producción, de qué capacidad deben ser y qué servicios de transporte debe utilizar para atender la demanda anual pronosticada para los próximos tres años?
+            \item[5.] ¿Cómo cambiaría su respuesta si se relaja la restricción de número de instalaciones por habilitar en cada ciudad? Es decir, si ahora se permite instalar más de una planta de producción en cada ciudad.
+            \item[6.] Exponga al menos 5 conclusiones de su trabajo indicando como mínimo: la importancia de la localización óptima de las instalaciones en los costos totales de la red de distribución, impacto de los costos de apertura de plantas de producción, los costos de transporte y costos de producción.\\
+        \end{enumerate}
+        
+    \newpage
+        \textbf{Tabla 1: Demanda regional actual que enfrenta Funnys Company}
+        \begin{center}
+            \begin{tabular}{|l|r|r|}
+                \hline
+                Región & Demanda Actual (unidades) & Tasa de Crecimiento \\
+                \hline
+                Región 01 & 951.776 & 0,16 \\
+                Región 02 & 967.364 & 0,22 \\
+                Región 03 & 512.051 & 0,26 \\
+                Región 04 & 386.248 & 0,15 \\
+                Región 05 & 946.174 & 0,39 \\
+                Región 06 & 303.445 & 0,30 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        
+        \vspace{0.5cm}
+        
+        \textbf{Tabla 2: Capacidad de planta de producción (unidades/año)}
+        \begin{center}
+            \begin{tabular}{|l|r|}
+                \hline
+                Tipo & Capacidad \\
+                \hline
+                Pequeña & 4.636.446 \\
+                Grande & 14.966.773 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        
+        \vspace{0.5cm}
+        
+        \textbf{Tabla 3: Costos de apertura y costos fijos y variables de producción, por tipo de planta y ciudad}
+        \begin{center}
+            \begin{tabular}{|l|l|r|r|r|}
+                \hline
+                Tipo & Ciudad & Costo Fijo (\$/año) & Costo Variable (\$/unidad) & Costo Apertura (\$) \\
+                \hline
+                Planta Pequeña & Antofagasta & 18.236.639 & 28,20 & 86.626.147 \\
+                Planta Pequeña & Valparaíso & 8.838.286 & 41,68 & 115.721.215 \\
+                Planta Pequeña & Santiago & 6.840.758 & 38,17 & 172.235.977 \\
+                Planta Pequeña & Rancagua & 13.378.246 & 17,63 & 57.494.934 \\
+                Planta Pequeña & Concepción & 26.394.217 & 50,11 & 51.494.934 \\
+                Planta Pequeña & Puerto Montt & 3.678.737 & 43,55 & 175.561.471 \\
+                \hline
+                Almacén Grande & Antofagasta & 30.788.796 & 28,20 & 201.456.157 \\
+                Almacén Grande & Valparaíso & 32.734.393 & 41,68 & 231.793.913 \\
+                Almacén Grande & Santiago & 35.932.948 & 38,17 & 344.903.247 \\
+                Almacén Grande & Rancagua & 29.585.543 & 17,63 & 103.923.903 \\
+                Almacén Grande & Concepción & 35.985.543 & 50,11 & 103.923.903 \\
+                Almacén Grande & Puerto Montt & 27.619.543 & 43,55 & 175.561.471 \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+    \newpage
+        \vspace{0.5cm}
+        
+        \textbf{Tabla 4: Costo de transporte por unidad de producto (\$/unidad), alternativa de transporte 01 (AT1)}
+        \begin{center}
+            \begin{tabular}{|l|r|r|r|r|r|r|}
+                \hline
+                Región & 01 & 02 & 03 & 04 & 05 & 06 \\
+                \hline
+                Antofagasta  & 1.06 & 2.80 & 10.29 & 4.87 & 6.41 & 10.35 \\
+                Valparaíso   & 3.49 & 6.19 & 3.39  & 6.77 & 3.07 & 6.61  \\
+                Santiago     & 6.38 & 5.88 & 5.36  & 9.23 & 5.67 & 5.57  \\
+                Rancagua     & 3.44 & 4.78 & 2.79  & 2.90 & 1.50 & 1.29  \\
+                Concepción   & 5.94 & 7.33 & 8.13  & 2.86 & 2.84 & 3.25  \\
+                Puerto Montt & 2.57 & 9.63 & 4.84  & 6.64 & 4.48 & 8.54  \\
+                \hline
+            \end{tabular}
+        \end{center}
+        
+        \vspace{0.5cm}
+        
+        \textbf{Tabla 5: Costo de transporte por unidad de producto (\$/unidad), alternativa de transporte 02 (AT2)}
+        \begin{center}
+            \begin{tabular}{|l|r|r|r|r|r|r|}
+                \hline
+                Región & 01 & 02 & 03 & 04 & 05 & 06 \\
+                \hline
+                Antofagasta  & 10.03 & 4.09 & 4.55  & 7.84 & 5.33 & 10.63 \\
+                Valparaíso   & 10.52 & 1.82 & 3.91  & 5.10 & 5.88 & 2.33  \\
+                Santiago     & 1.90  & 8.89 & 6.55  & 9.71 & 7.03 & 10.23 \\
+                Rancagua     & 2.06  & 10.17 & 2.12 & 6.91 & 4.79 & 6.19  \\
+                Concepción   & 2.54  & 6.95 & 5.10  & 4.85 & 4.51 & 3.78  \\
+                Puerto Montt & 7.92  & 10.32 & 1.41 & 4.94 & 2.74 & 8.08  \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        \vspace{0.5cm}
+        
+        \textbf{Tabla 6: Costo de transporte por unidad de producto (\$/unidad), alternativa de transporte 03 (AT3)}
+        \begin{center}
+            \begin{tabular}{|l|r|r|r|r|r|r|}
+                \hline
+                Región & 01 & 02 & 03 & 04 & 05 & 06 \\
+                \hline
+                Antofagasta  & 9.86 & 4.30 & 8.10  & 9.63 & 7.40 & 6.47  \\
+                Valparaíso   & 1.58 & 2.71 & 3.08  & 5.91 & 7.99 & 5.11  \\
+                Santiago     & 9.63 & 8.38 & 5.55  & 7.13 & 7.45 & 4.58  \\
+                Rancagua     & 2.06 & 10.17 & 2.12 & 6.91 & 4.79 & 6.19  \\
+                Concepción   & 9.62 & 7.88 & 5.19  & 2.61 & 3.78 & 1.34  \\
+                Puerto Montt & 10.32 & 8.88 & 10.87 & 8.53 & 4.51 & 1.54  \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+            
+    \newpage
+    \section{Formulaci\'on del Modelo Matem\'atico}
+    \begin{enumerate}
+        \item \textbf{Conjuntos:}
+        \begin{itemize}
+            \item $I$: Conjunto de ciudades \{$Antofagasta$, $Valpara\'iso$, $Santiago$, $Concepci\'on$, $Puerto Montt$, $Rancagua$\}.
+            \item $J$: Conjunto de tipos de plantas \{$pequeña$, $grande$\}.
+            \item $K$: Conjunto de regiones \{$R1$, $R2$, $R3$, $R4$, $R5$, $R6$\}.
+            \item $T$: Conjunto de transportes \{$AT1$, $AT2$, $AT3$\}.
+            \item $Y$: Conjunto de a\~nos \{$1$, $2$, $3$\}.
+        \end{itemize}
+        
+        \item \textbf{Par\'ametros:}
+        \begin{itemize}
+            \item $C_{ij}$: Costo de apertura en ciudad $i$ con tipo de planta $j$.
+            \item $Ct_{ikt}$: Costo de transporte por unidad de ciudad $i$ a regi\'on $k$ en transporte $t$.
+            \item $D_k$: Demanda actual de la regi\'on $k$.
+            \item $D_{ky}$: Demanda de la regi\'on $k$ en el a\~no $y$. ($D_k * (1 + Y_i)^y$)
+            \item $Cpp_j$: Capacidad de producci\'on de planta tipo $j$.
+            \item $Cv_{ij}$: Costo variable por unidad de la planta $j$ en la ciudad $i$.
+            \item $Cf_{ij}$: Costo fijo de planta $j$ en la ciudad $i$.
+            \item $T_i$: Tasa de crecimiento de la regi\'on $k$.
+        \end{itemize}
+        
+        \item \textbf{Variables:}
+        \begin{itemize}
+            \item \begin{equation}
+                X_{ij} =
+                \begin{cases}
+                    1, & \text{si abrir planta de producción \( j \) en la ciudad \( i \)} \\
+                    0, & \text{en otro caso (e.o.c.)}
+                \end{cases}
+            \end{equation}
+            \item $Y_{ikty}$: Cantidad de unidades transportadas de la ciudad $i$ a regi\'on $k$ en transporte $t$ en el a\~no $y$.
+        \end{itemize}
+        
+        \item \textbf{Restricciones:}
+        \begin{itemize}
+            \item A lo m\'as una planta de cada tipo por ciudad: \\ $\sum_{i} X_{ij} \leq 1, \quad \forall j \in J$
+            \item A lo m\'as una planta por ciudad: \\ $\sum_{j} X_{ij} \leq 1, \quad \forall i \in I$
+            \item Capacidad de producci\'on m\'axima: \\ $\sum_{k} \sum_{t} Y_{ikty} \leq X_{ij} \cdot Cpp_{j}, \quad \forall i \in I, \forall j \in J, \forall y \in Y$
+            \item Satisfacci\'on de la demanda: \\ $\sum_{i} \sum_{t} Y_{ikty} \geq D_{ky}, \quad \forall k, y$
+            \item Solo transporte entre ciudades con planta: \\ $\sum_{i} \sum_{t} Y_{ikty} \leq \sum_{j} X_{ij} \cdot Cpp_{j}, \quad \forall i, y$
+            \item Definici\'on de la variable binaria: \\ $X_{ij} \in \{0,1\}, \quad \forall i, j$
+        \end{itemize}
+
+        
+        \item \textbf{Funci\'on Objetivo:}
+        
+        \begin{equation*}
+            \min 
+                z = \sum_{i} \sum_{j} (C_{ij} + Cf_{ij}) \cdot X_{ij} 
+                + \sum_{i} \sum_{j} \sum_{k} \sum_{t} \sum_{y} Cv_{ij} \cdot Y_{ikty} 
+                + \sum_{i} \sum_{k} \sum_{t} \sum_{y} Ct_{ikt} \cdot Y_{ikty}
+     
+        \end{equation*}
+        
+        \item \textbf{Supuestos:}
+        \begin{itemize}
+            \item Cada ciudad puede tener a lo m\'as una planta, ya sea peque\~na o grande.
+            \item Se asume que el a\~no 0 corresponde al momento actual. Las decisiones del modelo se aplican desde el a\~no 1, considerando la tasa de crecimiento en la demanda.
+        \end{itemize}
+    \end{enumerate}
+
+    \newpage
+    \section{Preguntas y respuestas}
+
+    \begin{enumerate}
+        \item [4.] ¿Cu\'al es la configuraci\'on \'optima que le recomendar\'ia a Funnys Company si se considera la posibilidad de implementar plantas de producci\'on en las ciudades seleccionadas? Es decir, ¿D\'onde implementar\'ia las nuevas plantas de producci\'on, de qu\'e capacidad deben ser y qu\'e servicios de transporte debe utilizar para atender la demanda anual pronosticada para los pr\'oximos tres años? \\
+
+        La configuración óptima contempla el establecimiento de plantas en Santiago y Antofagasta. En Santiago, se recomienda una planta de alta capacidad, ya que centraliza el abastecimiento de todas las regiones (R1 a R6) durante los tres años, utilizando principalmente el servicio AT1 para los envíos. Por su parte, en Antofagasta se sugiere una planta de capacidad moderada, clave para abastecer a las regiones R2 y R3, especialmente en los años 2 y 3, mediante el uso de los servicios AT1 y AT2. Esta distribución permite reducir los costos de transporte al ubicar la producción cerca de las zonas con demanda crítica, como R3, y evitar una sobrecarga en la planta de Santiago. A continuación, se detallan los aspectos relacionados con la ubicación de las fábricas.
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|l|c|c|c|r|}
+            \hline
+            \textbf{Año} & \textbf{Ciudad} & \textbf{Región Destino} & \textbf{Transporte} & \textbf{Unidades} \\
+            \hline
+            1 & Antofagasta & R2 & AT1 & 446.828 \\
+            1 & Santiago    & R1 & AT2 & 1.104.060 \\
+            1 & Santiago    & R2 & AT1 & 733.356 \\
+            1 & Santiago    & R3 & AT1 & 645.184 \\
+            1 & Santiago    & R4 & AT1 & 444.185 \\
+            1 & Santiago    & R5 & AT1 & 1.315.181 \\
+            1 & Santiago    & R6 & AT1 & 394.478 \\
+            \hline\hline
+            2 & Antofagasta & R2 & AT1 & 1.439.824 \\
+            2 & Antofagasta & R3 & AT2 & 308.933 \\
+            2 & Santiago    & R1 & AT2 & 1.280.709 \\
+            2 & Santiago    & R3 & AT1 & 503.998 \\
+            2 & Santiago    & R4 & AT1 & 510.812 \\
+            2 & Santiago    & R5 & AT1 & 1.828.102 \\
+            2 & Santiago    & R6 & AT1 & 512.822 \\
+            \hline\hline
+            3 & Antofagasta & R1 & AT1 & 644.343 \\
+            3 & Antofagasta & R2 & AT1 & 1.756.585 \\
+            3 & Antofagasta & R3 & AT2 & 1.024.294 \\
+            3 & Santiago    & R1 & AT2 & 841.279 \\
+            3 & Santiago    & R4 & AT1 & 587.434 \\
+            3 & Santiago    & R5 & AT1 & 2.541.062 \\
+            3 & Santiago    & R6 & AT1 & 666.668 \\
+            \hline
+            \end{tabular}
+            \caption{Resultado del modelo. Se muestran las fábricas, la región de destino, el tipo de transporte y las unidades que se producirán.}
+            \label{tab:transporte}
+        \end{table}
+        
+        
+        La configuraci\'on \'optima que recomendamos a Funnys Company es implementar plantas de producci\'on en la regi\'on 5 \\
+
+    \newpage
+
+        \item [5.] ¿C\'omo cambiar\'ia su respuesta si se relaja la restricci\'on de n\'umero de instalaciones por habilitar en cada ciudad? Es decir, si ahora se permite instalar m\'as de una planta de producci\'on en cada ciudad. \\
+
+        Si al modelo le permitimos agregar más de un tipo de planta, ocurrirá que Santiago absorbería toda la producción, eliminando la necesidad de Antofagasta. Sin embargo, esto elevaría el costo total en un 22\% (de 1,387 MM a 1,693 MM) debido a dos factores:
+
+        \begin{itemize}
+            \item \textbf{Mayores costos fijos:} Apertura de 2-3 plantas en Santiago para alcanzar una capacidad combinada de 5–6 millones de unidades anuales.
+
+            \item \textbf{Incremento en costos de transporte:} Envíos desde Santiago a regiones lejanas como R2 y R3 serían más costosos que desde Antofagasta.
+            Este escenario muestra que la restricción original es más eficiente, ya que equilibra costos fijos y variables al distribuir plantas estratégicamente.
+
+        \end{itemize}
+
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|l|c|c|r|}
+            \hline
+            \textbf{Año} & \textbf{Ciudad} & \textbf{Región Destino} & \textbf{Transporte} & \textbf{Unidades} \\
+            \hline
+            1 & Santiago & R1 & AT2 & 1.104.060 \\
+            1 & Santiago & R2 & AT1 & 1.180.184 \\
+            1 & Santiago & R3 & AT1 & 645.184 \\
+            1 & Santiago & R4 & AT1 & 444.185 \\
+            1 & Santiago & R5 & AT1 & 1.315.181 \\
+            1 & Santiago & R6 & AT1 & 394.478 \\
+            \hline\hline
+            2 & Santiago & R1 & AT2 & 1.280.709 \\
+            2 & Santiago & R2 & AT1 & 1.439.824 \\
+            2 & Santiago & R3 & AT1 & 812.932 \\
+            2 & Santiago & R4 & AT1 & 510.812 \\
+            2 & Santiago & R5 & AT1 & 1.828.102 \\
+            2 & Santiago & R6 & AT1 & 512.822 \\
+            \hline\hline
+            3 & Santiago & R1 & AT2 & 1.485.623 \\
+            3 & Santiago & R2 & AT1 & 1.756.585 \\
+            3 & Santiago & R3 & AT1 & 1.024.294 \\
+            3 & Santiago & R4 & AT1 & 587.434 \\
+            3 & Santiago & R5 & AT1 & 2.541.062 \\
+            3 & Santiago & R6 & AT1 & 666.668 \\
+            \hline
+            \end{tabular}
+            \caption{Resultado del modelo con la resticcion del tipo de planta relajada. Se muestran las fábricas, la región de destino, el tipo de transporte y las unidades que se producirán.}
+            \label{tab:transporte}
+        \end{table}
+
+        
+        
+        
+        
+        \item [6.] Exponga al menos 5 conclusiones de su trabajo indicando como m\'inimo: la importancia de la localizaci\'on \'optima de las instalaciones en los costos totales de la red de distribuci\'on, impacto de los costos de apertura de plantas de producci\'on, los costos de transporte y costos de producción.\\
+
+        \begin{itemize}
+            \item \textbf{Localizaci\'on \'optima de las instalaciones:} Si se colocan las plantas en zonas estrategicas permite minimizar los costos de transporte y responder facilmente a la demanda, reduciendo los tiempos y costos de logistica.
+
+            \item \textbf{Impacto de los costos de apertura:} Los costos de apertura que tiene cada planta influye bastante para tomar la decisi\'on, ya que ciudades como Puerto Montt tiene alto costo de apertura en plantas peque\~{n}as, limitando su selecci\'on para una nueva planta si no se tiene alg\'un tipo de beneficio.
+
+            \item \textbf{Costos de transporte:} Si se selecciona una empresa de transporte adecuada, puede significar grandes ahorros dependiendo de las rutas entre las regiones, donde se destaca principalmente AT1, que presenta costos por lo general bajos, aunque para algunas rutas especificas AT2 y AT3 pueden ser m\'as convenientes de utilizar.
+
+            \item \textbf{Escalabilidad de la producci\'on:} A pesar de que las plantas grandes ofrecen bastante capacidad para satisfacer la demanda creciente, su alto costo de apertura puede ser un impedimento a la hora de tomar la decisi\'on si no se justifica con alg\'un beneficio.
+
+            \item \textbf{Restricciones en la instalaci\'on afectan la soluci\'on:} Al limitar en un inicio una planta por cada ciudad, restringe bastante el espacio de soluciones, llevando a una soluci\'on sub-optima, pero luego, al relajar esta restricción, se tradujo en menores costos, ya que el modelo empieza a tener m\'as grados de libertad para buscar la conbinaci\'on m\'mas eficiente entre todos los costos, como por ejemplo permitiendo abrir m\'as de una planta peque\~{n}a en una ciudad significando menores costos de apertura.
+        \end{itemize}
+        \\
+    \end{enumerate}
+    
+\end{document}
