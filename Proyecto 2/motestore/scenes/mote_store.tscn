@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://dvs0i0htmwyb6"]
+[gd_scene load_steps=117 format=4 uid="uid://dvs0i0htmwyb6"]
 
 [ext_resource type="Script" uid="uid://b2v3dubt08rrk" path="res://scenes/mote_store.gd" id="1_o4a1f"]
 [ext_resource type="Texture2D" uid="uid://d2fremlfvifuv" path="res://assets/sprites/Interiors_free_16x16.png" id="2_jrfci"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ctnycn8dqlchm" path="res://assets/characters/Adam_16x16.png" id="3_o4a1f"]
 [ext_resource type="Texture2D" uid="uid://dauqolt4ato1p" path="res://assets/characters/Bob_16x16.png" id="4_c4x53"]
 [ext_resource type="Script" uid="uid://byp3layxffwgo" path="res://scenes/camera_2d.gd" id="6_c4x53"]
+[ext_resource type="Script" uid="uid://brq40jr6q2hpj" path="res://scenes/sistema_jugo.gd" id="7_4p8li"]
+[ext_resource type="Script" uid="uid://blqmvdfv13t33" path="res://scenes/sistema_mote.gd" id="8_lh8h7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uaksq"]
 texture = ExtResource("2_jrfci")
@@ -2087,12 +2089,30 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_lh8h7"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_kx1bo"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_546d2"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ngal"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_0l3r5"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_scu85"]
+font_size = 13
+
 [node name="moteStore" type="Node2D"]
 script = ExtResource("1_o4a1f")
 
 [node name="mote" type="Sprite2D" parent="."]
 top_level = true
-position = Vector2(63, 67)
+position = Vector2(15, 27)
 texture = ExtResource("2_jrfci")
 region_enabled = true
 region_rect = Rect2(0, 1096, 16, 24)
@@ -2106,14 +2126,14 @@ tile_set = SubResource("TileSet_uaksq")
 
 [node name="jugo" type="Sprite2D" parent="."]
 top_level = true
-position = Vector2(105, 67)
+position = Vector2(46, 27)
 texture = ExtResource("2_jrfci")
 region_enabled = true
 region_rect = Rect2(16, 1096, 16, 24)
 
 [node name="envases" type="Sprite2D" parent="."]
 top_level = true
-position = Vector2(152, 60)
+position = Vector2(82, 27)
 texture = ExtResource("2_jrfci")
 region_enabled = true
 region_rect = Rect2(48, 296, 16, 32)
@@ -2130,32 +2150,127 @@ sprite_frames = SubResource("SpriteFrames_wml40")
 animation = &"stand_down"
 frame_progress = 0.367114
 
-[node name="BarraMote" type="ProgressBar" parent="."]
-offset_left = 42.0
-offset_top = 48.0
-offset_right = 46.0
-offset_bottom = 75.0
-metadata/_edit_use_anchors_ = true
-
-[node name="BarraJugo" type="ProgressBar" parent="."]
-offset_left = 89.0
-offset_top = 48.0
-offset_right = 93.0
-offset_bottom = 75.0
-metadata/_edit_use_anchors_ = true
-
-[node name="BarraEnvases" type="ProgressBar" parent="."]
-offset_left = 131.0
-offset_top = 47.0
-offset_right = 135.0
-offset_bottom = 74.0
-metadata/_edit_use_anchors_ = true
-
 [node name="ControladorTimer" type="Timer" parent="."]
-wait_time = 2.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(194, 110)
 zoom = Vector2(3, 3)
 script = ExtResource("6_c4x53")
+
+[node name="Sensores" type="Node" parent="."]
+
+[node name="SensorPHjugo" type="VBoxContainer" parent="Sensores"]
+offset_left = 114.0
+offset_top = 3.0
+offset_right = 162.0
+offset_bottom = 79.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorPHjugo"]
+layout_mode = 2
+text = "ph Jugo"
+label_settings = SubResource("LabelSettings_lh8h7")
+
+[node name="PHJugo" type="ProgressBar" parent="Sensores/SensorPHjugo"]
+layout_mode = 2
+max_value = 20.0
+
+[node name="PHJugoAlerta" type="Label" parent="Sensores/SensorPHjugo"]
+layout_mode = 2
+
+[node name="SensorAzucarJugo" type="VBoxContainer" parent="Sensores"]
+offset_left = 304.0
+offset_top = 2.0
+offset_right = 378.0
+offset_bottom = 78.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorAzucarJugo"]
+layout_mode = 2
+text = "Azucar Jugo"
+label_settings = SubResource("LabelSettings_kx1bo")
+
+[node name="AzucarJugo" type="ProgressBar" parent="Sensores/SensorAzucarJugo"]
+layout_mode = 2
+
+[node name="AzucarJugoAlerta" type="Label" parent="Sensores/SensorAzucarJugo"]
+layout_mode = 2
+
+[node name="SensorNivelJugo" type="VBoxContainer" parent="Sensores"]
+offset_left = 485.0
+offset_top = 1.0
+offset_right = 548.0
+offset_bottom = 82.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorNivelJugo"]
+layout_mode = 2
+text = "Nivel Jugo"
+label_settings = SubResource("LabelSettings_546d2")
+
+[node name="NivelJugo" type="ProgressBar" parent="Sensores/SensorNivelJugo"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="NivelJugoAlerta" type="Label" parent="Sensores/SensorNivelJugo"]
+layout_mode = 2
+
+[node name="SensorPHmote" type="VBoxContainer" parent="Sensores"]
+offset_top = 238.0
+offset_right = 53.0
+offset_bottom = 319.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorPHmote"]
+layout_mode = 2
+text = "ph Mote"
+label_settings = SubResource("LabelSettings_8ngal")
+
+[node name="PHMote" type="ProgressBar" parent="Sensores/SensorPHmote"]
+layout_mode = 2
+max_value = 20.0
+
+[node name="PHMoteAlerta" type="Label" parent="Sensores/SensorPHmote"]
+layout_mode = 2
+
+[node name="SensorPesoMote" type="VBoxContainer" parent="Sensores"]
+offset_left = 2.0
+offset_top = 147.0
+offset_right = 69.0
+offset_bottom = 223.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorPesoMote"]
+layout_mode = 2
+text = "Peso mote"
+label_settings = SubResource("LabelSettings_0l3r5")
+
+[node name="PesoMote" type="ProgressBar" parent="Sensores/SensorPesoMote"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PesoMoteAlerta" type="Label" parent="Sensores/SensorPesoMote"]
+layout_mode = 2
+
+[node name="SensorEnvases" type="VBoxContainer" parent="Sensores"]
+offset_left = 299.0
+offset_top = 134.0
+offset_right = 383.0
+offset_bottom = 215.0
+
+[node name="Etiqueta" type="Label" parent="Sensores/SensorEnvases"]
+layout_mode = 2
+text = "Peso Envases"
+label_settings = SubResource("LabelSettings_scu85")
+
+[node name="PesoEnvases" type="ProgressBar" parent="Sensores/SensorEnvases"]
+layout_mode = 2
+max_value = 30.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PesoEnvasesAlerta" type="Label" parent="Sensores/SensorEnvases"]
+layout_mode = 2
+
+[node name="SistemaJugo" type="Node" parent="."]
+script = ExtResource("7_4p8li")
+
+[node name="SistemaMote" type="Node" parent="."]
+script = ExtResource("8_lh8h7")
+
+[connection signal="timeout" from="ControladorTimer" to="." method="_on_controlador_timer_timeout"]
