@@ -6,6 +6,7 @@ extends Node
 
 var timer := Timer.new()
 var ocupado = false
+var cliente_atendido: Node2D = null
 
 func _ready():
 	add_child(timer)
@@ -21,11 +22,19 @@ func _process(_delta):
 			var cliente = fila.sacar_siguiente_cliente()
 			_atender_cliente(cliente)
 
-func _atender_cliente(_cliente: Node2D):
+func _atender_cliente(cliente: Node2D):
 	ocupado = true
 	get_node(ui_orden).text = "Atendiendo a cliente..."
+	
+	cliente_atendido = cliente
+	
 	timer.start(tiempo_atencion)
 
 func _on_terminar_atencion():
+	if cliente_atendido:
+		var fila = get_node(controlador_fila)
+		await fila.quitar_cliente_con_animacion(cliente_atendido)
+		cliente_atendido = null
+	
 	get_node(ui_orden).text = "Libre"
 	ocupado = false
