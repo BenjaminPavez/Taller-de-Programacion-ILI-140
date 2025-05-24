@@ -1894,10 +1894,9 @@ script = ExtResource("7_4p8li")
 [node name="SistemaMote" type="Node" parent="."]
 script = ExtResource("8_lh8h7")
 
-[node name="ClienteSpawner" type="Node" parent="." node_paths=PackedStringArray("punto_entrada", "punto_salida")]
+[node name="ClienteSpawner" type="Node" parent="." node_paths=PackedStringArray("punto_entrada")]
 script = ExtResource("9_kx1bo")
 punto_entrada = NodePath("../PuntoEntrada")
-punto_salida = NodePath("../PuntoSalida")
 controlador_fila = NodePath("../ControladorFila")
 
 [node name="ControladorFila" type="Node" parent="." node_paths=PackedStringArray("punto_salida")]
