@@ -21,24 +21,30 @@ extends Node2D
 @onready var peso_envases = $Sensores/SensorEnvases/PesoEnvases
 @onready var peso_envases_alerta = $Sensores/SensorEnvases/PesoEnvasesAlerta
 
+# Recursos totales de la tienda
+var porcentaje_mote := 100.0
+var porcentaje_jugo := 100.0
+var gramos_envases := 600.0 #600 = 30 envases de 20 gramos
+
 func _ready():
 	$ControladorTimer.start()
 	$SistemaJugo.set_widgets(jugo_ph, jugo_ph_alerta, jugo_azucar_alerta, jugo_altura_alerta)
 	$SistemaMote.set_widgets(mote_ph, mote_ph_alerta, peso_mote_alerta)
 func _on_controlador_timer_timeout():
-	# Simulación
-	jugo_ph.value = randf_range(3.0, 20.0)
-	jugo_azucar.value = randf_range(5.0, 100.0)
-	altura_jugo.value = randf_range(10.0, 100.0)
-	mote_ph.value = randf_range(3.0, 20.0)
-	peso_mote.value = randf_range(1.0, 100.0)
-	peso_envases.value = randf_range(1.0, 30.0)
+	peso_mote.value = porcentaje_mote
+	altura_jugo.value = porcentaje_jugo
+	peso_envases.value = gramos_envases
+	
+	# ph y azucar aleatorios por ahora (luego hay que simularlos bien)
+	jugo_ph.value = randf_range(3.0, 6.0)
+	jugo_azucar.value = randf_range(5.0, 20.0)
+	mote_ph.value = randf_range(3.0, 6.0)
 
-	# Llamado a sistemas expertos
-	$SistemaJugo.evaluar(jugo_ph.value, jugo_azucar.value, altura_jugo.value)
-	$SistemaMote.evaluar(mote_ph.value, peso_mote.value)
-	# Se revisa el peso de envases (no sistema experto al tener 1 "sensor")
-	if peso_envases.value < 5:
+	$SistemaJugo.evaluar(jugo_ph.value, jugo_azucar.value, porcentaje_jugo)
+	$SistemaMote.evaluar(mote_ph.value, porcentaje_mote)
+
+	# Alerta por peso de envases
+	if gramos_envases < 100:
 		peso_envases_alerta.text = "¡Pocos envases!"
 	else:
 		peso_envases_alerta.text = "Suficientes envases"
