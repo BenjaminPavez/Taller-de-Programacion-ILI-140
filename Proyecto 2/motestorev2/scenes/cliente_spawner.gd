@@ -2,7 +2,6 @@ extends Node
 
 @onready var cliente_escena = preload("res://scenes/ClientNPC/cliente.tscn")
 @export var punto_entrada: Marker2D
-@export var punto_salida: Marker2D
 @export var controlador_fila: NodePath
 
 @export var min_llegada = 5.0 #Minimo tiempo para spawn de cliente
