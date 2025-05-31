@@ -3,10 +3,23 @@ extends Node2D
 signal tween_fin
 signal llego_a_fila
 @onready var sprite = $Cliente
+@onready var cabeza = $Cabeza
+
+var dialogo_pedido : Node2D = null
+const DialogoPedido = preload("res://scenes/DialogoPedido.tscn")
 
 # Variables para movimiento
 var destino: Vector2
 var velocidad = 100.0
+
+func mostrar_pedido(tipo_pedido: int):
+	if dialogo_pedido:
+		dialogo_pedido.queue_free()
+
+	dialogo_pedido = DialogoPedido.instantiate()
+	cabeza.add_child(dialogo_pedido)
+	dialogo_pedido.mostrar_pedido(tipo_pedido)
+
 
 func _animar_direccion(dir: Vector2):
 	if abs(dir.x) > abs(dir.y):
