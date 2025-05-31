@@ -1972,7 +1972,9 @@ proveedor_envases_scene = ExtResource("12_scu85")
 empleado_scene = ExtResource("13_scu85")
 
 [node name="PuntoEntradaEmpleados" type="Marker2D" parent="."]
+position = Vector2(-196, 60)
 
 [node name="PuntoSalidaEmpleados" type="Marker2D" parent="."]
+position = Vector2(-224, 60)
 
 [connection signal="timeout" from="ControladorTimer" to="." method="_on_controlador_timer_timeout"]
