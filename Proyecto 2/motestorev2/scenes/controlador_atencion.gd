@@ -25,6 +25,8 @@ func _process(_delta):
 		if cliente_pendiente == null and fila.clientes_fila.size() > 0:
 			cliente_pendiente = fila.sacar_siguiente_cliente()
 			pedido_en_espera = Pedido.new(randi_range(1, 4))
+			
+			cliente_pendiente.mostrar_pedido(pedido_en_espera.tipo)
 
 		if cliente_pendiente and recursos_suficientes(pedido_en_espera):
 			_atender_cliente(cliente_pendiente)
@@ -76,6 +78,10 @@ func _on_terminar_atencion():
 		tienda.porcentaje_mote = max(tienda.porcentaje_mote, 0)
 		tienda.porcentaje_jugo = max(tienda.porcentaje_jugo, 0)
 		tienda.gramos_envases = max(tienda.gramos_envases, 0)
+		
+		#Se muestra cara feliz y espera 1.5 segundos antes de irse
+		cliente_atendido.mostrar_pedido(5)
+		await get_tree().create_timer(1.5).timeout
 
 		var fila = get_node(controlador_fila)
 		await fila.quitar_cliente_con_animacion(cliente_atendido)

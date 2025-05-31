@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://dvs0i0htmwyb6"]
+[gd_scene load_steps=75 format=4 uid="uid://dvs0i0htmwyb6"]
 
 [ext_resource type="Script" uid="uid://b2v3dubt08rrk" path="res://scenes/mote_store.gd" id="1_o4a1f"]
 [ext_resource type="Texture2D" uid="uid://d2fremlfvifuv" path="res://assets/sprites/Interiors_free_16x16.png" id="2_jrfci"]
@@ -9,7 +9,10 @@
 [ext_resource type="Script" uid="uid://blqmvdfv13t33" path="res://scenes/sistema_mote.gd" id="8_lh8h7"]
 [ext_resource type="Script" uid="uid://epi32q25j6yu" path="res://scenes/cliente_spawner.gd" id="9_kx1bo"]
 [ext_resource type="Script" uid="uid://chbu02himb2ew" path="res://scenes/controlador_fila.gd" id="10_8ngal"]
+[ext_resource type="Script" uid="uid://cnf16nx6eo7wg" path="res://scenes/ControladorReposicion.gd" id="11_0l3r5"]
 [ext_resource type="Script" uid="uid://dlccccw8ieq27" path="res://scenes/controlador_atencion.gd" id="11_546d2"]
+[ext_resource type="PackedScene" uid="uid://futm0k8pkt74" path="res://scenes/proveedor_npc.tscn" id="12_scu85"]
+[ext_resource type="PackedScene" uid="uid://b06mv6er2unbt" path="res://empleado_npc.tscn" id="13_scu85"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uaksq"]
 texture = ExtResource("2_jrfci")
@@ -1824,7 +1827,7 @@ offset_right = 143.0
 offset_bottom = 203.0
 
 [node name="PuntoEntrada" type="Marker2D" parent="."]
-position = Vector2(251, 406)
+position = Vector2(415, 377)
 
 [node name="PuntoSalida" type="Marker2D" parent="."]
 position = Vector2(59, 378)
@@ -1844,7 +1847,8 @@ label_settings = SubResource("LabelSettings_lh8h7")
 
 [node name="PHJugo" type="ProgressBar" parent="Sensores/SensorPHjugo"]
 layout_mode = 2
-max_value = 20.0
+max_value = 6.0
+show_percentage = false
 
 [node name="PHJugoAlerta" type="Label" parent="Sensores/SensorPHjugo"]
 layout_mode = 2
@@ -1862,6 +1866,8 @@ label_settings = SubResource("LabelSettings_kx1bo")
 
 [node name="AzucarJugo" type="ProgressBar" parent="Sensores/SensorAzucarJugo"]
 layout_mode = 2
+max_value = 20.0
+show_percentage = false
 
 [node name="AzucarJugoAlerta" type="Label" parent="Sensores/SensorAzucarJugo"]
 layout_mode = 2
@@ -1897,16 +1903,17 @@ label_settings = SubResource("LabelSettings_8ngal")
 
 [node name="PHMote" type="ProgressBar" parent="Sensores/SensorPHmote"]
 layout_mode = 2
-max_value = 20.0
+max_value = 6.0
+show_percentage = false
 
 [node name="PHMoteAlerta" type="Label" parent="Sensores/SensorPHmote"]
 layout_mode = 2
 
 [node name="SensorPesoMote" type="VBoxContainer" parent="Sensores"]
-offset_left = 481.0
-offset_top = 137.0
-offset_right = 548.0
-offset_bottom = 213.0
+offset_left = 532.0
+offset_top = 134.0
+offset_right = 599.0
+offset_bottom = 210.0
 
 [node name="Etiqueta" type="Label" parent="Sensores/SensorPesoMote"]
 layout_mode = 2
@@ -1938,5 +1945,34 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PesoEnvasesAlerta" type="Label" parent="Sensores/SensorEnvases"]
 layout_mode = 2
+
+[node name="PuntoEntradaProveedores" type="Marker2D" parent="."]
+position = Vector2(-196, 42)
+
+[node name="PuntoReposicion_mote" type="Marker2D" parent="."]
+position = Vector2(15, 45)
+
+[node name="PuntoReposicion_jugo" type="Marker2D" parent="."]
+position = Vector2(45, 45)
+
+[node name="PuntoReposicion_envases" type="Marker2D" parent="."]
+position = Vector2(82, 46)
+
+[node name="PuntoSalidaProveedores" type="Marker2D" parent="."]
+position = Vector2(-224, 42)
+
+[node name="ControladorReposicion" type="Node" parent="."]
+script = ExtResource("11_0l3r5")
+sistema_mote_path = NodePath("../SistemaMote")
+sistema_jugo_path = NodePath("../SistemaJugo")
+tienda_path = NodePath("..")
+proveedor_mote_scene = ExtResource("12_scu85")
+proveedor_jugo_scene = ExtResource("12_scu85")
+proveedor_envases_scene = ExtResource("12_scu85")
+empleado_scene = ExtResource("13_scu85")
+
+[node name="PuntoEntradaEmpleados" type="Marker2D" parent="."]
+
+[node name="PuntoSalidaEmpleados" type="Marker2D" parent="."]
 
 [connection signal="timeout" from="ControladorTimer" to="." method="_on_controlador_timer_timeout"]
