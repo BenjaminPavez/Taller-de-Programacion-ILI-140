@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmnclo5vctpb1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t5h4s"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_p7tpu"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqdr8"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_ukoep"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_etvcy"]
+font_size = 13
+
+[sub_resource type="LabelSettings" id="LabelSettings_wacap"]
+font_size = 13
+
+[node name="Sensores" type="Node"]
+
+[node name="SensorPHjugo" type="VBoxContainer" parent="."]
+offset_left = 380.0
+offset_top = 152.0
+offset_right = 428.0
+offset_bottom = 228.0
+
+[node name="Etiqueta" type="Label" parent="SensorPHjugo"]
+layout_mode = 2
+text = "ph Jugo"
+label_settings = SubResource("LabelSettings_t5h4s")
+
+[node name="PHJugo" type="ProgressBar" parent="SensorPHjugo"]
+layout_mode = 2
+max_value = 6.0
+show_percentage = false
+
+[node name="PHJugoAlerta" type="Label" parent="SensorPHjugo"]
+layout_mode = 2
+
+[node name="SensorAzucarJugo" type="VBoxContainer" parent="."]
+offset_left = 560.0
+offset_top = 270.0
+offset_right = 634.0
+offset_bottom = 346.0
+
+[node name="Etiqueta" type="Label" parent="SensorAzucarJugo"]
+layout_mode = 2
+text = "Azucar Jugo"
+label_settings = SubResource("LabelSettings_p7tpu")
+
+[node name="AzucarJugo" type="ProgressBar" parent="SensorAzucarJugo"]
+layout_mode = 2
+max_value = 20.0
+show_percentage = false
+
+[node name="AzucarJugoAlerta" type="Label" parent="SensorAzucarJugo"]
+layout_mode = 2
+
+[node name="SensorNivelJugo" type="VBoxContainer" parent="."]
+offset_left = 741.0
+offset_top = 269.0
+offset_right = 804.0
+offset_bottom = 350.0
+
+[node name="Etiqueta" type="Label" parent="SensorNivelJugo"]
+layout_mode = 2
+text = "Nivel Jugo"
+label_settings = SubResource("LabelSettings_uqdr8")
+
+[node name="NivelJugo" type="ProgressBar" parent="SensorNivelJugo"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="NivelJugoAlerta" type="Label" parent="SensorNivelJugo"]
+layout_mode = 2
+
+[node name="SensorPHmote" type="VBoxContainer" parent="."]
+offset_left = 568.0
+offset_top = 143.0
+offset_right = 621.0
+offset_bottom = 224.0
+
+[node name="Etiqueta" type="Label" parent="SensorPHmote"]
+layout_mode = 2
+text = "ph Mote"
+label_settings = SubResource("LabelSettings_ukoep")
+
+[node name="PHMote" type="ProgressBar" parent="SensorPHmote"]
+layout_mode = 2
+max_value = 6.0
+show_percentage = false
+
+[node name="PHMoteAlerta" type="Label" parent="SensorPHmote"]
+layout_mode = 2
+
+[node name="SensorPesoMote" type="VBoxContainer" parent="."]
+offset_left = 788.0
+offset_top = 402.0
+offset_right = 855.0
+offset_bottom = 478.0
+
+[node name="Etiqueta" type="Label" parent="SensorPesoMote"]
+layout_mode = 2
+text = "Peso mote"
+label_settings = SubResource("LabelSettings_etvcy")
+
+[node name="PesoMote" type="ProgressBar" parent="SensorPesoMote"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PesoMoteAlerta" type="Label" parent="SensorPesoMote"]
+layout_mode = 2
+
+[node name="SensorEnvases" type="VBoxContainer" parent="."]
+offset_left = 555.0
+offset_top = 402.0
+offset_right = 639.0
+offset_bottom = 483.0
+
+[node name="Etiqueta" type="Label" parent="SensorEnvases"]
+layout_mode = 2
+text = "Peso Envases"
+label_settings = SubResource("LabelSettings_wacap")
+
+[node name="PesoEnvases" type="ProgressBar" parent="SensorEnvases"]
+layout_mode = 2
+max_value = 600.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PesoEnvasesAlerta" type="Label" parent="SensorEnvases"]
+layout_mode = 2
