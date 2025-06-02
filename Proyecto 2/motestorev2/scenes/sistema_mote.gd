@@ -27,7 +27,7 @@ func _on_request_completed(result, response_code, headers, body):
 		var datos = body.get_string_from_utf8().split(",")
 		var ph = float(datos[0])
 		var peso = float(datos[1])
-		print("[SISTEMA MOTE] Recibido -> pH:", ph, ", Peso:", peso)
+		print("[SISTEMA MOTE RECIBIO VALORES DE SENSOR (via RabbitMQ)] Recibido -> pH:", ph, ", Peso:", peso)
 		evaluar(ph, peso)
 	await get_tree().create_timer(2).timeout
 	_actualizar_sensores()

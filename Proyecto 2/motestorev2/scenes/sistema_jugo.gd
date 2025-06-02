@@ -24,7 +24,7 @@ func _on_request_completed(result, response_code, headers, body):
 		var ph = float(datos[0])
 		var azucar = float(datos[1])
 		var altura = float(datos[2])
-		print("[MENSAJE PETICION HTTP] Recibido -> pH:", ph, ", Azúcar:", azucar, ", Altura:", altura)
+		print("[SISTEMA JUGO RECIBIO VALORES DE SENSOR (via RabbitMQ)] Recibido -> pH:", ph, ", Azúcar:", azucar, ", Altura:", altura)
 		evaluar(ph, azucar, altura)
 	#Espera 2 segundos y vuelve a pedir datos
 	await get_tree().create_timer(2).timeout
