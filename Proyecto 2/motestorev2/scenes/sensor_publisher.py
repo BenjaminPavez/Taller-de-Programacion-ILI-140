@@ -12,9 +12,9 @@ channel.queue_declare(queue='sensores_mote')
 channel.queue_declare(queue='sensores_peso')
 
 # Estado actual de los sensores
-estado_jugo = {"ph": 4.0, "azucar": 10, "altura": 100}
-estado_mote = {"ph": 4.0, "peso": 25}
-estado_envases = {"peso": 600.0}
+estado_jugo = {"ph": 4.0, "azucar": 10, "altura": 100}  # altura como porcentaje
+estado_mote = {"ph": 4.0, "peso": 25}  # peso máximo 25
+estado_envases = {"peso": 600.0}  # peso en gramos
 
 app = Flask(__name__)
 
@@ -55,14 +55,18 @@ def consumir():
         cantidad = float(data['cantidad'])
         
         if tipo == "jugo":
+            # Para jugo, cantidad viene como porcentaje directo
             estado_jugo["altura"] = max(0, estado_jugo["altura"] - cantidad)
-            print(f"[Consumo JUGO] Consumido: {cantidad}, Nuevo nivel: {estado_jugo['altura']}")
+            print(f"[Consumo JUGO] Consumido: {cantidad}%, Nuevo nivel: {estado_jugo['altura']}%")
         elif tipo == "mote":
-            estado_mote["peso"] = max(0, estado_mote["peso"] - cantidad)
-            print(f"[Consumo MOTE] Consumido: {cantidad}, Nuevo peso: {estado_mote['peso']}")
+            # Para mote, convertir porcentaje a peso (máximo 25)
+            peso_consumido = (cantidad / 100.0) * 25.0
+            estado_mote["peso"] = max(0, estado_mote["peso"] - peso_consumido)
+            print(f"[Consumo MOTE] Consumido: {cantidad}% ({peso_consumido}g), Nuevo peso: {estado_mote['peso']}g")
         elif tipo == "envases":
+            # Para envases, cantidad viene en gramos directos
             estado_envases["peso"] = max(0, estado_envases["peso"] - cantidad)
-            print(f"[Consumo VASOS] Consumido: {cantidad}, Nuevo peso: {estado_envases['peso']}")
+            print(f"[Consumo VASOS] Consumido: {cantidad}g, Nuevo peso: {estado_envases['peso']}g")
         
         return jsonify({"status": "OK"})
     except Exception as e:

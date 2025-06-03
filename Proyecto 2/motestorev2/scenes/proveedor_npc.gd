@@ -42,37 +42,42 @@ func _al_llegar_a_reposicion():
 	
 	match tipo:
 		"mote":
+			# Actualizar valores locales
 			tienda.porcentaje_mote = 100.0
 			var nuevo_ph = randf_range(3.0, 6.0)
 			tienda.mote_ph.value = nuevo_ph
-			# Enviar valores correctos para mote
+			# Enviar valores correctos para mote (pH, peso basado en porcentaje)
+			var peso_mote = (tienda.porcentaje_mote / 100.0) * 25.0  # peso máximo 25
 			_enviar_actualizacion_sensor(
 				"mote",
-				str(nuevo_ph) + "," + str(25.0)  # pH, peso inicial
+				str(nuevo_ph) + "," + str(peso_mote)
 			)
-			print("Reposición MOTE: pH=" + str(nuevo_ph) + ", peso=25.0")
+			print("Reposición MOTE: pH=" + str(nuevo_ph) + ", peso=" + str(peso_mote))
 			
 		"jugo":
+			# Actualizar valores locales
 			tienda.porcentaje_jugo = 100.0
 			var nuevo_ph = randf_range(3.0, 6.0)
 			var nuevo_azucar = randf_range(5.0, 20.0)
 			tienda.jugo_ph.value = nuevo_ph
 			tienda.jugo_azucar.value = nuevo_azucar
-			# Enviar valores correctos para jugo
+			# Enviar valores correctos para jugo (pH, azúcar, altura basada en porcentaje)
+			var altura_jugo = tienda.porcentaje_jugo  # altura directa del porcentaje
 			_enviar_actualizacion_sensor(
 				"jugo",
-				str(nuevo_ph) + "," + str(nuevo_azucar) + "," + str(100.0)  # pH, azúcar, altura
+				str(nuevo_ph) + "," + str(nuevo_azucar) + "," + str(altura_jugo)
 			)
-			print("Reposición JUGO: pH=" + str(nuevo_ph) + ", azúcar=" + str(nuevo_azucar) + ", altura=100.0")
+			print("Reposición JUGO: pH=" + str(nuevo_ph) + ", azúcar=" + str(nuevo_azucar) + ", altura=" + str(altura_jugo))
 			
 		"envases":
+			# Actualizar valores locales
 			tienda.gramos_envases = 600.0
 			# Enviar peso correcto para envases
 			_enviar_actualizacion_sensor(
 				"envases",
-				str(600.0)  # Solo peso
+				str(tienda.gramos_envases)
 			)
-			print("Reposición ENVASES: peso=600.0")
+			print("Reposición ENVASES: peso=" + str(tienda.gramos_envases))
 	
 	print("Reposición de " + tipo + " completada")
 	
