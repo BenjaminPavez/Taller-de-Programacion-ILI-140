@@ -9,7 +9,7 @@ connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='sensores_jugo')
 channel.queue_declare(queue='sensores_mote')
-channel.queue_declare(queue='sensores_peso')
+channel.queue_declare(queue='sensores_peso') #EL PESO DE LOS VASOS
 
 # Estado actual de los sensores
 estado_jugo = {"ph": 4.0, "azucar": 10, "altura": 100}  # altura como porcentaje
