@@ -24,7 +24,7 @@ extends Node2D
 signal envases_bajos
 var envases_bajo_emitido := false
 
-# Recursos totales de la tienda
+#Recursos totales de la tienda
 var porcentaje_mote := 30.0
 var porcentaje_jugo := 30.0
 var gramos_envases := 200.0 #600 = 30 envases de 20 gramos
