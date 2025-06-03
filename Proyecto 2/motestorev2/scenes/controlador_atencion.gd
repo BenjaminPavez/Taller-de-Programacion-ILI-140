@@ -17,7 +17,6 @@ func _ready():
 	timer.one_shot = true
 	timer.connect("timeout", Callable(self, "_on_terminar_atencion"))
 	set_process(true)
-	
 
 func _process(_delta):
 	if not ocupado:
@@ -43,33 +42,45 @@ func recursos_suficientes(pedido: Pedido) -> bool:
 	return tienda.porcentaje_mote >= pedido.req_mote \
 		and tienda.porcentaje_jugo >= pedido.req_jugo \
 		and tienda.gramos_envases >= pedido.req_envases
+
+func consumir_sensor(tipo: String, cantidad: float):
+	print("Enviando consumo a publisher - Tipo: " + tipo + ", Cantidad: " + str(cantidad))
+	var http = HTTPRequest.new()
+	add_child(http)
 	
-func realizar_pedido():
-	var pedido = randi_range(1, 4)
-	match pedido:
-		1:  # 1 Mote con jugo
-			tienda.porcentaje_mote -= 2
-			tienda.porcentaje_jugo -= 2
-			tienda.gramos_envases -= 20
-		2:  # 2 Motes con jugo
-			tienda.porcentaje_mote -= 4
-			tienda.porcentaje_jugo -= 4
-			tienda.gramos_envases -= 40
-		3:  # Envase con mote
-			tienda.porcentaje_mote -= 6
-			tienda.gramos_envases -= 20
-		4:  # Envase con jugo
-			tienda.porcentaje_jugo -= 6
-			tienda.gramos_envases -= 20
+	# Conectar señal para debug
+	http.request_completed.connect(_on_consumo_completed)
 	
-	# Seguridad para evitar valores negativos
-	tienda.porcentaje_mote = max(tienda.porcentaje_mote, 0)
-	tienda.porcentaje_jugo = max(tienda.porcentaje_jugo, 0)
-	tienda.gramos_envases = max(tienda.gramos_envases, 0)
+	var body = {"tipo": tipo, "cantidad": cantidad}
+	var json_body = JSON.stringify(body)
+	var headers = ["Content-Type: application/json"]
+	
+	# Cambiar puerto a 5001 (publisher)
+	var error = http.request("http://localhost:5001/consumir", headers, HTTPClient.METHOD_POST, json_body)
+	if error != OK:
+		print("Error enviando consumo: " + str(error))
+
+func _on_consumo_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+	if response_code == 200:
+		print("Consumo registrado exitosamente")
+	else:
+		print("Error registrando consumo: " + str(response_code))
 
 func _on_terminar_atencion():
 	if cliente_atendido and pedido_en_espera:
-		# Aplicar el gasto
+		print("Procesando pedido - Mote: " + str(pedido_en_espera.req_mote) + 
+			  ", Jugo: " + str(pedido_en_espera.req_jugo) + 
+			  ", Envases: " + str(pedido_en_espera.req_envases))
+		
+		# Enviar consumos al sensor publisher
+		if pedido_en_espera.req_mote > 0:
+			consumir_sensor("mote", pedido_en_espera.req_mote)
+		if pedido_en_espera.req_jugo > 0:
+			consumir_sensor("jugo", pedido_en_espera.req_jugo)
+		if pedido_en_espera.req_envases > 0:
+			consumir_sensor("envases", pedido_en_espera.req_envases)
+		
+		# Aplicar el gasto localmente también
 		tienda.porcentaje_mote -= pedido_en_espera.req_mote
 		tienda.porcentaje_jugo -= pedido_en_espera.req_jugo
 		tienda.gramos_envases -= pedido_en_espera.req_envases
@@ -79,7 +90,11 @@ func _on_terminar_atencion():
 		tienda.porcentaje_jugo = max(tienda.porcentaje_jugo, 0)
 		tienda.gramos_envases = max(tienda.gramos_envases, 0)
 		
-		#Se muestra cara feliz y espera 1.5 segundos antes de irse
+		print("Nuevos niveles locales -> Mote: " + str(tienda.porcentaje_mote) + 
+			  ", Jugo: " + str(tienda.porcentaje_jugo) + 
+			  ", Envases: " + str(tienda.gramos_envases))
+		
+		# Se muestra cara feliz y espera 1.5 segundos antes de irse
 		cliente_atendido.mostrar_pedido(5)
 		await get_tree().create_timer(1.5).timeout
 
