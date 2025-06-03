@@ -97,6 +97,7 @@ func _on_controlador_timer_timeout():
 	$SistemaMote.evaluar(mote_ph.value, porcentaje_mote)
 
 	# Alerta por peso de envases
+	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: %d gr" % gramos_envases)
 	if gramos_envases < 100:
 		peso_envases_alerta.text = "¡Pocos envases!"
 		if not envases_bajo_emitido:
