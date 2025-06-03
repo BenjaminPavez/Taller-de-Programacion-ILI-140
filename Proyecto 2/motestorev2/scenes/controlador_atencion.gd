@@ -72,7 +72,7 @@ func _on_terminar_atencion():
 			  ", Jugo: " + str(pedido_en_espera.req_jugo) + 
 			  ", Envases: " + str(pedido_en_espera.req_envases))
 		
-		# Enviar consumos al sensor publisher
+		# SOLO enviar consumos al sensor publisher (él será la fuente de verdad)
 		if pedido_en_espera.req_mote > 0:
 			consumir_sensor("mote", pedido_en_espera.req_mote)
 		if pedido_en_espera.req_jugo > 0:
@@ -80,7 +80,7 @@ func _on_terminar_atencion():
 		if pedido_en_espera.req_envases > 0:
 			consumir_sensor("envases", pedido_en_espera.req_envases)
 		
-		# Aplicar el gasto localmente también
+		# Aplicar el gasto localmente también (mantener sincronía local)
 		tienda.porcentaje_mote -= pedido_en_espera.req_mote
 		tienda.porcentaje_jugo -= pedido_en_espera.req_jugo
 		tienda.gramos_envases -= pedido_en_espera.req_envases
