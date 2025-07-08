@@ -2,7 +2,6 @@
 
 Edificios tienen activos críticos de los cuales necesitan mantención y de alguna forma, prevenir fallos. Uno de los activos críticos presentes en edificios son las cañerías.
 
-
 ## Enlaces importantes
 
 - **Notebook en Google Colab:**  
@@ -29,4 +28,10 @@ Este trabajo se enfoca en el monitoreo y análisis de activos críticos en infra
 
 ---
 
+## Integrantes Equipo Butify
 
+- Nicolas Horta
+- Nicolas Olivos
+- Benjamin Pavez
+- Ariel Pulgar
+- Gabriel Saez
