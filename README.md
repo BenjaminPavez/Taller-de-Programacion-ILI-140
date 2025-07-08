@@ -1,5 +1,5 @@
 > [!NOTE]  
-> La rama `main` contiene los cambios más recientes del **Proyecto 2**.
+> La rama `main` contiene los cambios más recientes del **Proyecto 3**.
 
 # Taller-de-Programacion-ILI-140
 Proyecto 1: Python  
